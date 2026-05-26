@@ -126,20 +126,16 @@ def classify_document_type(
 
     if face_detected:
         # Passport: portrait orientation
-        if aspect < 0.85:
+        if aspect < 1.0:
             return "passport"
-        # Driver's license: wide landscape
-        if aspect >= 1.55:
-            return "driver_license"
-        # ID card: standard landscape
-        if 1.3 <= aspect < 1.55:
-            return "id_card"
+        # ID card / driver's license: landscape (same physical size, indistinguishable by shape)
+        return "id_card"
 
-    # Text-only document (no face): classify by aspect ratio only
+    # Text-only document without face: classify by orientation only
     if text_detected:
-        if aspect < 0.85:
+        if aspect < 1.0:
             return "passport"
-        if 1.3 <= aspect <= 1.7:
+        if aspect >= 1.2:
             return "id_card"
 
     return "unknown"
