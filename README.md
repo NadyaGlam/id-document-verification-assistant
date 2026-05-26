@@ -3,6 +3,7 @@
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.104-green?logo=fastapi)
 ![OpenCV](https://img.shields.io/badge/OpenCV-4.8-red?logo=opencv)
+![Deployed](https://img.shields.io/badge/Deployed-Render-purple?logo=render)
 ![Pydantic](https://img.shields.io/badge/Pydantic-v2-purple)
 ![pytest](https://img.shields.io/badge/tested%20with-pytest-yellow?logo=pytest)
 ![Docker](https://img.shields.io/badge/Docker-ready-blue?logo=docker)
