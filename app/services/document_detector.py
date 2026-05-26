@@ -124,20 +124,15 @@ def classify_document_type(
     if not has_document_signals:
         return "unknown"
 
-    if face_detected:
-        # Passport: portrait orientation
-        if aspect < 1.0:
-            return "passport"
-        # ID card / driver's license: landscape (same physical size, indistinguishable by shape)
+    # Face on a document = photo ID (id_card covers driver's license too —
+    # both are ID-1 format, indistinguishable by shape alone without a trained model)
+    if face_detected and text_detected:
         return "id_card"
 
-    # Text-only document without face: classify by orientation only
-    if text_detected:
-        if aspect < 1.0:
-            return "passport"
-        if aspect >= 1.2:
-            return "id_card"
+    if face_detected:
+        return "id_card"
 
+    # No face but text present — likely a document, but type is uncertain
     return "unknown"
 
 
