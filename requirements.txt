@@ -4,7 +4,7 @@ uvicorn[standard]>=0.24.0
 python-multipart>=0.0.6
 
 # --- Computer Vision ---
-opencv-python>=4.8.0
+opencv-python-headless>=4.8.0
 numpy>=1.24.0
 
 # --- Data Validation ---
@@ -17,6 +17,6 @@ pytest>=7.4.0
 pytest-asyncio>=0.21.0
 httpx>=0.25.0
 
-# --- Optional OCR ---
-easyocr>=1.7.0            # Мощный, самодостаточный (PyTorch внутри). Не нужен системный бинарник.
-# pytesseract>=0.3.10     # Лёгкий альтернативный вариант. Требует: brew install tesseract
+# --- Optional OCR (install locally, not in Docker — too heavy for free hosting) ---
+# easyocr>=1.7.0          # Local: pip install easyocr  (requires ~2GB, PyTorch)
+# pytesseract>=0.3.10     # Local: pip install pytesseract + brew install tesseract
