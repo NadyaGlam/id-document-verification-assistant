@@ -106,24 +106,34 @@ def detect_glare(image: np.ndarray) -> bool:
 
 
 def classify_document_type(
-    document_detected: bool, face_detected: bool, image: np.ndarray
+    document_detected: bool,
+    face_detected: bool,
+    text_detected: bool,
+    image: np.ndarray,
 ) -> str:
     """
-    Heuristic document type classifier based on aspect ratio and face presence.
+    Heuristic document type classifier based on aspect ratio and face/text presence.
+    Falls back to aspect-ratio classification even when contour detection fails,
+    as long as face or text signals confirm a document is present.
     Replace with a trained classifier for production use.
     """
-    if not document_detected:
-        return "unknown"
-
     h, w = image.shape[:2]
     aspect = w / h
 
+    has_document_signals = document_detected or face_detected or text_detected
+    if not has_document_signals:
+        return "unknown"
+
     if 1.3 <= aspect <= 1.7 and face_detected:
         return "id_card"
-    if 0.65 <= aspect <= 0.85:
+    if 0.65 <= aspect <= 0.85 and (face_detected or text_detected):
         return "passport"
     if aspect >= 1.5 and face_detected:
         return "driver_license"
+
+    # Face detected but aspect ratio doesn't match known formats
+    if face_detected and text_detected:
+        return "id_card"
 
     return "unknown"
 
@@ -133,7 +143,9 @@ def analyze_document(image: np.ndarray) -> DocumentCheckResult:
     face_detected = detect_face(image)
     text_detected = detect_text_regions(image)
     has_glare_warning = detect_glare(image)
-    document_type = classify_document_type(document_detected, face_detected, image)
+    document_type = classify_document_type(
+        document_detected, face_detected, text_detected, image
+    )
 
     return DocumentCheckResult(
         document_detected=document_detected,
