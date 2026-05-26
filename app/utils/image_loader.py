@@ -41,8 +41,24 @@ async def load_image_from_upload(file: UploadFile) -> np.ndarray:
             detail="Could not decode image. The file may be corrupted or is not a valid image.",
         )
 
+    image = _resize_if_needed(image)
+
     logger.info(
         f"Image loaded: '{file.filename}' | "
         f"size={len(contents):,} bytes | shape={image.shape}"
     )
     return image
+
+
+def _resize_if_needed(image: np.ndarray, max_side: int = 1920) -> np.ndarray:
+    """Resize image so the longest side is at most max_side pixels.
+    Preserves aspect ratio. Prevents OOM on free-tier servers with large phone photos.
+    """
+    h, w = image.shape[:2]
+    longest = max(h, w)
+    if longest <= max_side:
+        return image
+    scale = max_side / longest
+    new_w = int(w * scale)
+    new_h = int(h * scale)
+    return cv2.resize(image, (new_w, new_h), interpolation=cv2.INTER_AREA)
