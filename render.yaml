@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: id-document-verification-assistant
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: DEBUG
+        value: false
+      - key: MAX_UPLOAD_SIZE_MB
+        value: 10
