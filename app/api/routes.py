@@ -30,8 +30,9 @@ logger = get_logger(__name__)
         "Upload a JPG or PNG image of an ID document. "
         "Returns image quality metrics, document detection results, "
         "optional OCR text, and a risk-based recommendation. "
-        "This endpoint is for portfolio/educational purposes only — "
-        "it does NOT perform legal identity verification."
+        "This project is a technical prototype for document image analysis and "
+        "verification-readiness assessment. It is not intended for legal identity "
+        "verification or official decision-making."
     ),
     tags=["Document Analysis"],
 )

@@ -7,7 +7,7 @@
 ![pytest](https://img.shields.io/badge/tested%20with-pytest-yellow?logo=pytest)
 ![Docker](https://img.shields.io/badge/Docker-ready-blue?logo=docker)
 
-> **Disclaimer**: This is a portfolio/educational project. It does **not** perform legal identity verification and must **not** be used in production KYC or AML systems.
+> **Disclaimer**: This project is a technical prototype for document image analysis and verification-readiness assessment. It is **not** intended for legal identity verification or official decision-making.
 
 ---
 

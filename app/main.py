@@ -15,8 +15,9 @@ def create_app() -> FastAPI:
         description=(
             "A Computer Vision backend that analyzes uploaded ID document images "
             "for image quality, document readiness, OCR text extraction, and risk assessment.\n\n"
-            "> **Disclaimer**: This is a portfolio/educational project. "
-            "It does **not** perform legal identity verification."
+            "> **Disclaimer**: This project is a technical prototype for document image analysis "
+            "and verification-readiness assessment. It is **not** intended for legal identity "
+            "verification or official decision-making."
         ),
         docs_url="/docs",
         redoc_url="/redoc",
